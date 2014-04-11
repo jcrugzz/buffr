@@ -1,7 +1,7 @@
 {
-  "name": "req-buffer",
+  "name": "buffr",
   "version": "0.1.0",
-  "description": "A simple psuedo stream that captures",
+  "description": "A simple psuedo stream that captures and stores the data that is piped through it",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*-test.js"
@@ -9,7 +9,8 @@
   "keywords": [
     "buffering",
     "stream",
-    "duplex"
+    "duplex",
+    "buffr"
   ],
   "author": "Jarrett Cruger <jcrugzz@gmail.com>",
   "license": "MIT",
