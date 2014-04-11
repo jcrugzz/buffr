@@ -1,0 +1,24 @@
+{
+  "name": "req-buffer",
+  "version": "0.0.0",
+  "description": "A simple psuedo stream that captures",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*-test.js"
+  },
+  "keywords": [
+    "buffering",
+    "stream",
+    "duplex"
+  ],
+  "author": "Jarrett Cruger <jcrugzz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "bl": "^0.8.0",
+    "buffered": "0.0.1",
+    "concat-stream": "^1.4.4",
+    "http-proxy": "^1.1.0",
+    "tape": "^2.12.3"
+  }
+}
