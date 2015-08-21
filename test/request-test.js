@@ -179,3 +179,55 @@ test('correctly duplicate buffer after a failed request since we save chunks in 
     proxyServer.close();
   }
 });
+
+test('successfully retry on a GET request', function (t) {
+  t.plan(2);
+  var server,
+      buffer;
+
+  var proxy = new HttpProxy();
+  proxy.on('error', retry);
+
+  var proxyServer = http.createServer(function (req, res) {
+    process.nextTick(function () {
+      req.pipe(res);
+    });
+  });
+
+  server = http.createServer(function (req, res) {
+    buffer = req.pipe(new Buffr());
+    proxy.web(req, res, {
+      target: 'http://localhost:3003',
+      buffer: buffer
+    });
+  });
+
+  function retry (err, req, res) {
+    t.ok(err, 'Correctly errored, retrying..')
+    proxyServer.listen(3003, function () {
+      proxy.web(req, res, {
+        target: 'http://localhost:3003',
+        buffer: buffer.duplicate()
+      })
+    })
+  }
+
+  server.listen(3004, request.bind(null, 3004));
+
+  function request (port) {
+    req = http.get('http://localhost:' + port, response);
+  }
+
+  function response (res) {
+    t.ok(true);
+    cleanup();
+  }
+
+  function cleanup (err) {
+    if (err) {
+      return t.fail(err.message);
+    }
+    server.close();
+    proxyServer.close();
+  }
+});

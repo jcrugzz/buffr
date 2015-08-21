@@ -16,7 +16,7 @@ function Buffr (chunks) {
     : this.chunks;
 
   this.on('pipe', this._onPipe.bind(this));
-  if(this.chunks.length) {
+  if(chunks) {
     this.load();
   }
 }
