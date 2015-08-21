@@ -1,6 +1,6 @@
 {
   "name": "buffr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple psuedo stream that captures and stores the data that is piped through it",
   "main": "index.js",
   "scripts": {
