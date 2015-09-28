@@ -209,7 +209,7 @@ test('successfully retry on a GET request', function (t) {
         target: 'http://localhost:3003',
         buffer: buffer.duplicate()
       })
-    })
+    });
   }
 
   server.listen(3004, request.bind(null, 3004));

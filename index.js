@@ -16,7 +16,7 @@ function Buffr (chunks) {
     : this.chunks;
 
   this.on('pipe', this._onPipe.bind(this));
-  if(chunks) {
+  if (chunks) {
     this.load();
   }
 }
@@ -25,9 +25,16 @@ function Buffr (chunks) {
 // Load chunks that were passed into the constructor as a new stream
 //
 Buffr.prototype.load = function () {
-  for(var i=0; i<this.chunks.length; i++) {
+  for (var i=0; i < this.chunks.length; i++) {
     this.push(this.chunks[i]);
   }
+  //
+  // When we load ourselves from the constructor, we are assumed to just destroy
+  // ourselves to free up the memory taken by `this.chunks` as we are most
+  // likely being used in a way where we arent keeping a reference and just
+  // piping to a stream
+  //
+  this.destroy();
   this.push(null);
 };
 
